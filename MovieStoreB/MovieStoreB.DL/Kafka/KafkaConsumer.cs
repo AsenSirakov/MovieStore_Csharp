@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 namespace MovieStoreB.DL.Kafka
 {
 
-    internal class KafkaConsumer<TData,TKey> : BackgroundService, IKafkaConsumer<TData,TKey> where TData : CacheItem<TKey> where TKey : notnull
-    {\
+    internal class KafkaConsumer<TData, TKey> : BackgroundService, IKafkaConsumer<TData, TKey> where TData : CacheItem<TKey> where TKey : notnull
+    {
         private readonly ConsumerConfig _config;
         private readonly IConsumer<TKey, TData> _consumer;
 
@@ -43,4 +43,5 @@ namespace MovieStoreB.DL.Kafka
         {
 
         }
+    }
 }

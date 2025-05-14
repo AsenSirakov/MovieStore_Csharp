@@ -1,0 +1,16 @@
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieStoreB.DL.csproj.AssemblyReference.cache
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieStoreB.DL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieStoreB.DL.AssemblyInfoInputs.cache
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieStoreB.DL.AssemblyInfo.cs
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieStoreB.DL.csproj.CoreCompileInputs.cache
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieStoreB.DL.sourcelink.json
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\bin\Debug\net8.0\MovieStoreB.DL.deps.json
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\bin\Debug\net8.0\MovieStoreB.DL.dll
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\bin\Debug\net8.0\MovieStoreB.DL.pdb
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\bin\Debug\net8.0\MovieStoreB.Models.dll
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\bin\Debug\net8.0\MovieStoreB.Models.pdb
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieSto.9CB5B6CA.Up2Date
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieStoreB.DL.dll
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\refint\MovieStoreB.DL.dll
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\MovieStoreB.DL.pdb
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.DL\obj\Debug\net8.0\ref\MovieStoreB.DL.dll

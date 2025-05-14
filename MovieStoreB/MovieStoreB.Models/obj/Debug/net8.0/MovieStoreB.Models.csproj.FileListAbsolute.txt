@@ -1,0 +1,13 @@
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\bin\Debug\net8.0\MovieStoreB.Models.deps.json
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\bin\Debug\net8.0\MovieStoreB.Models.dll
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\bin\Debug\net8.0\MovieStoreB.Models.pdb
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\MovieStoreB.Models.csproj.AssemblyReference.cache
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\MovieStoreB.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\MovieStoreB.Models.AssemblyInfoInputs.cache
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\MovieStoreB.Models.AssemblyInfo.cs
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\MovieStoreB.Models.csproj.CoreCompileInputs.cache
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\MovieStoreB.Models.sourcelink.json
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\MovieStoreB.Models.dll
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\refint\MovieStoreB.Models.dll
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\MovieStoreB.Models.pdb
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB.Models\obj\Debug\net8.0\ref\MovieStoreB.Models.dll

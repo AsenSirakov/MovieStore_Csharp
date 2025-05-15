@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.dl\\kafka\\kafkaconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|solutionrelative:moviestoreb.dl\\kafka\\kafkaconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "KafkaConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaConsumer.cs*",
+              "RelativeToolTip": "MovieStoreB.DL\\Kafka\\KafkaConsumer.cs*",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBwAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T15:31:38.593Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

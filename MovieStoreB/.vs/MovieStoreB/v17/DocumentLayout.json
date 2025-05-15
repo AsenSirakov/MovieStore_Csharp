@@ -1,12 +1,71 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FA3BFFAD-ADE9-4380-B97B-38BE146D81AE}|MovieStoreB.Models\\MovieStoreB.Models.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.models\\dto\\cacheitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA3BFFAD-ADE9-4380-B97B-38BE146D81AE}|MovieStoreB.Models\\MovieStoreB.Models.csproj|solutionrelative:moviestoreb.models\\dto\\cacheitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.dl\\cache\\mongocachedistributor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|solutionrelative:moviestoreb.dl\\cache\\mongocachedistributor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.dl\\kafka\\kafkaconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|solutionrelative:moviestoreb.dl\\kafka\\kafkaconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CacheItem.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.Models\\DTO\\CacheItem.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.Models\\DTO\\CacheItem.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.Models\\DTO\\CacheItem.cs",
+              "RelativeToolTip": "MovieStoreB.Models\\DTO\\CacheItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T16:16:06.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MongoCacheDistributor.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Cache\\MongoCacheDistributor.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.DL\\Cache\\MongoCacheDistributor.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Cache\\MongoCacheDistributor.cs",
+              "RelativeToolTip": "MovieStoreB.DL\\Cache\\MongoCacheDistributor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T16:13:13.435Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "KafkaConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "RelativeToolTip": "MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwBwAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T15:31:38.593Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

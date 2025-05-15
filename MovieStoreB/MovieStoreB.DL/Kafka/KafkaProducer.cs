@@ -8,9 +8,13 @@ namespace MovieStoreB.DL.Kafka
     {
         private readonly ProducerConfig _config;
         private readonly IProducer<TKey, TData> _producer;
+        private readonly string _topicName;
 
         public KafkaProducer()
         {
+            // Set topic based on data type
+            _topicName = typeof(TData).Name == "Movie" ? "movies_cache" : "actors_cache";
+
             _config = new ProducerConfig()
             {
                 BootstrapServers = "kafka-193981-0.cloudclusters.net:10300",
@@ -28,7 +32,7 @@ namespace MovieStoreB.DL.Kafka
 
         public async Task Produce(TData message)
         {
-            await _producer.ProduceAsync("test", new Message<TKey, TData>
+            await _producer.ProduceAsync(_topicName, new Message<TKey, TData>
             {
                 Key = message.GetKey(),
                 Value = message
@@ -38,7 +42,6 @@ namespace MovieStoreB.DL.Kafka
         public async Task ProduceAll(IEnumerable<TData> messages)
         {
             var tasks = messages.Select(message => Produce(message));
-
             await Task.WhenAll(tasks);
         }
 
@@ -58,12 +61,10 @@ namespace MovieStoreB.DL.Kafka
                 }
             }
 
-            // Process any remaining messages
             if (batch.Count > 0)
             {
                 await Task.WhenAll(batch);
             }
         }
-
     }
 }

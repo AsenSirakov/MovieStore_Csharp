@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MovieStoreB.DL.Cache;
-using MovieStoreB.DL.Gateways;  // ADD THIS
+using MovieStoreB.DL.Gateways;
 using MovieStoreB.DL.Interfaces;
 using MovieStoreB.DL.Kafka;
 using MovieStoreB.DL.Repositories.MongoRepositories;
@@ -13,6 +13,9 @@ namespace MovieStoreB.DL
     {
         public static IServiceCollection AddDataDependencies(this IServiceCollection services, IConfiguration config)
         {
+            // Register HttpClient for RestSharp
+            services.AddHttpClient();
+
             // Your existing repository registrations
             services.AddSingleton<IMovieRepository, MoviesRepository>();
             services.AddSingleton<IActorRepository, ActorMongoRepository>();
@@ -21,17 +24,33 @@ namespace MovieStoreB.DL
             services.AddSingleton<IInMemoryCacheService<Movie, string>, InMemoryCacheService<Movie, string>>();
             services.AddSingleton<IInMemoryCacheService<Actor, string>, InMemoryCacheService<Actor, string>>();
 
-            // ADD THIS LINE - Register the ActorBioGateway
+            // Register the ActorBioGateway
             services.AddSingleton<IActorBioGateway, ActorBioGateway>();
 
-            // Your existing cache services (KEEP ALL OF THIS)
-            services.AddCache<MoviesCacheConfiguration, MoviesRepository, Movie, string>(config);
-            services.AddCache<ActorsCacheConfiguration, ActorMongoRepository, Actor, string>(config);
+            // Check if Kafka is enabled before registering Kafka services
+            var kafkaEnabled = config.GetValue<bool>("KafkaConfiguration:Enabled");
+
+            if (kafkaEnabled)
+            {
+                // Only register Kafka services if enabled
+                services.AddCache<MoviesCacheConfiguration, MoviesRepository, Movie, string>(config);
+                services.AddCache<ActorsCacheConfiguration, ActorMongoRepository, Actor, string>(config);
+            }
+            else
+            {
+                // Register cache configurations without Kafka services
+                services.Configure<MoviesCacheConfiguration>(config.GetSection(nameof(MoviesCacheConfiguration)));
+                services.Configure<ActorsCacheConfiguration>(config.GetSection(nameof(ActorsCacheConfiguration)));
+
+                // Register cache repositories only (no Kafka)
+                services.AddSingleton<ICacheRepository<Movie>, MoviesRepository>();
+                services.AddSingleton<ICacheRepository<Actor>, ActorMongoRepository>();
+            }
 
             return services;
         }
 
-        // Your existing AddCache method (KEEP AS IS)
+        // Modified AddCache method to only register when Kafka is enabled
         public static IServiceCollection AddCache<TCacheConfiguration, TCacheRepository, TData, TKey>(
             this IServiceCollection services, IConfiguration config)
             where TCacheConfiguration : CacheConfiguration
@@ -62,7 +81,7 @@ namespace MovieStoreB.DL
         }
     }
 
-    // Your existing configurations (KEEP AS IS)
+    // Your existing configurations
     public class MoviesCacheConfiguration : CacheConfiguration
     {
     }

@@ -10,7 +10,10 @@ namespace MovieStoreB.BL.Services
         private readonly IActorRepository _actorRepository;
         private readonly IActorBioGateway _actorBioGateway;
 
-        public MovieService(IMovieRepository movieRepository, IActorRepository actorRepository, IActorBioGateway actorBioGateway)
+        public MovieService(
+            IMovieRepository movieRepository,
+            IActorRepository actorRepository,
+            IActorBioGateway actorBioGateway)
         {
             _movieRepository = movieRepository;
             _actorRepository = actorRepository;
@@ -19,11 +22,13 @@ namespace MovieStoreB.BL.Services
 
         public async Task<List<Movie>> GetMovies()
         {
+            // These test calls should now work
             var testBio = await _actorBioGateway.GetBioByActorId("1");
             var testBio2 = await _actorBioGateway.GetBioByActor(new Actor());
             return await _movieRepository.GetMovies();
         }
 
+        // ... rest of your existing methods remain the same
         public async Task AddMovie(Movie movie)
         {
             if (movie == null || movie.ActorIds == null) return;
@@ -41,7 +46,6 @@ namespace MovieStoreB.BL.Services
         public async Task DeleteMovie(string id)
         {
             if (string.IsNullOrEmpty(id)) return;
-
             await _movieRepository.DeleteMovie(id);
         }
 
@@ -51,11 +55,9 @@ namespace MovieStoreB.BL.Services
             {
                 return null;
             }
-
             return await _movieRepository.GetMoviesById(movieId.ToString());
         }
 
-        
         public async Task AddActor(string movieId, Actor actor)
         {
             if (string.IsNullOrEmpty(movieId) || actor == null) return;
@@ -75,21 +77,18 @@ namespace MovieStoreB.BL.Services
 
             var existingActor = await _actorRepository.GetById(actor.Id);
 
-            
             if (existingActor == null)
             {
                 await _actorRepository.AddActor(actor);
             }
 
-            
             if (!movie.ActorIds.Contains(actor.Id))
             {
                 movie.ActorIds.Add(actor.Id);
-                await _movieRepository.UpdateMovie(movie); // Need to save the updated movie
+                await _movieRepository.UpdateMovie(movie);
             }
         }
 
-        // New method needed for updating movies
         public async Task ImportMoviesFromExternalApi()
         {
             // Implementation moved to EnhancedMovieService

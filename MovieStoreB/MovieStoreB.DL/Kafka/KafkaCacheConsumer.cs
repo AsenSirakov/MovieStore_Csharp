@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MovieStoreB.DL.Cache;
 using MovieStoreB.Models.DTO;
-using MovieStoreB.Models.Serialization;
+using System.Text.Json;
 
 namespace MovieStoreB.DL.Kafka
 {
@@ -14,10 +14,11 @@ namespace MovieStoreB.DL.Kafka
         where TConfigurationType : CacheConfiguration
     {
         private readonly ConsumerConfig _config;
-        private readonly IConsumer<TKey, TData> _consumer;
+        private readonly IConsumer<TKey, string> _consumer;
         private readonly IInMemoryCacheService<TData, TKey> _cacheService;
         private readonly IOptionsMonitor<TConfigurationType> _configuration;
         private readonly ILogger<KafkaCacheConsumer<TData, TKey, TConfigurationType>> _logger;
+        private readonly JsonSerializerOptions _jsonOptions;
 
         public KafkaCacheConsumer(
             IInMemoryCacheService<TData, TKey> cacheService,
@@ -27,6 +28,12 @@ namespace MovieStoreB.DL.Kafka
             _cacheService = cacheService;
             _configuration = configuration;
             _logger = logger;
+
+            _jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNameCaseInsensitive = true
+            };
 
             _config = new ConsumerConfig()
             {
@@ -41,8 +48,7 @@ namespace MovieStoreB.DL.Kafka
                 EnableAutoCommit = false
             };
 
-            _consumer = new ConsumerBuilder<TKey, TData>(_config)
-                .SetValueDeserializer(new MessagePackDeserializer<TData>())
+            _consumer = new ConsumerBuilder<TKey, string>(_config)
                 .SetErrorHandler((_, e) => _logger.LogError("Kafka consumer error: {Error}", e.Reason))
                 .Build();
 
@@ -72,16 +78,25 @@ namespace MovieStoreB.DL.Kafka
 
                         if (consumeResult?.Message?.Value != null)
                         {
-                            await _cacheService.AddOrUpdate(consumeResult.Message.Value);
-                            _consumer.Commit(consumeResult);
+                            var data = JsonSerializer.Deserialize<TData>(consumeResult.Message.Value, _jsonOptions);
 
-                            _logger.LogDebug("Consumed and cached {DataType} with key {Key}",
-                                typeof(TData).Name, consumeResult.Message.Key);
+                            if (data != null)
+                            {
+                                await _cacheService.AddOrUpdate(data);
+                                _consumer.Commit(consumeResult);
+
+                                _logger.LogDebug("Consumed and cached {DataType} with key {Key}",
+                                    typeof(TData).Name, consumeResult.Message.Key);
+                            }
                         }
                     }
                     catch (ConsumeException ex)
                     {
                         _logger.LogError(ex, "Error consuming message from Kafka for {DataType}", typeof(TData).Name);
+                    }
+                    catch (JsonException ex)
+                    {
+                        _logger.LogError(ex, "Error deserializing JSON message for {DataType}", typeof(TData).Name);
                     }
                     catch (Exception ex)
                     {

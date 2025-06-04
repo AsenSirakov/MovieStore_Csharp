@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.dl\\kafka\\kafkacacheconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|solutionrelative:moviestoreb.dl\\kafka\\kafkacacheconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.dl\\kafka\\kafkaconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|solutionrelative:moviestoreb.dl\\kafka\\kafkaconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.dl\\kafka\\kafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|solutionrelative:moviestoreb.dl\\kafka\\kafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,16 +19,28 @@
       "RelativeMoniker": "D:0:0:{296D91F9-F7C6-47C7-9651-B5934FFAED51}|MovieStoreB\\MovieStoreB.csproj|solutionrelative:moviestoreb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{FA3BFFAD-ADE9-4380-B97B-38BE146D81AE}|MovieStoreB.Models\\MovieStoreB.Models.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.models\\dto\\cacheitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA3BFFAD-ADE9-4380-B97B-38BE146D81AE}|MovieStoreB.Models\\MovieStoreB.Models.csproj|solutionrelative:moviestoreb.models\\dto\\cacheitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA3BFFAD-ADE9-4380-B97B-38BE146D81AE}|MovieStoreB.Models\\MovieStoreB.Models.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.models\\dto\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA3BFFAD-ADE9-4380-B97B-38BE146D81AE}|MovieStoreB.Models\\MovieStoreB.Models.csproj|solutionrelative:moviestoreb.models\\dto\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA3BFFAD-ADE9-4380-B97B-38BE146D81AE}|MovieStoreB.Models\\MovieStoreB.Models.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.models\\dto\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA3BFFAD-ADE9-4380-B97B-38BE146D81AE}|MovieStoreB.Models\\MovieStoreB.Models.csproj|solutionrelative:moviestoreb.models\\dto\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{296D91F9-F7C6-47C7-9651-B5934FFAED51}|MovieStoreB\\MovieStoreB.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb\\moviestoreb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{296D91F9-F7C6-47C7-9651-B5934FFAED51}|MovieStoreB\\MovieStoreB.csproj|solutionrelative:moviestoreb\\moviestoreb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{296D91F9-F7C6-47C7-9651-B5934FFAED51}|MovieStoreB\\MovieStoreB.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{296D91F9-F7C6-47C7-9651-B5934FFAED51}|MovieStoreB\\MovieStoreB.csproj|solutionrelative:moviestoreb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb.dl\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AF18E570-DC7A-4D09-A504-6E8F881A9620}|MovieStoreB.DL\\MovieStoreB.DL.csproj|solutionrelative:moviestoreb.dl\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{296D91F9-F7C6-47C7-9651-B5934FFAED51}|MovieStoreB\\MovieStoreB.csproj|c:\\users\\asens\\github\\movie_store_project\\moviestoreb\\moviestoreb\\moviestoreb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{296D91F9-F7C6-47C7-9651-B5934FFAED51}|MovieStoreB\\MovieStoreB.csproj|solutionrelative:moviestoreb\\moviestoreb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,32 +55,97 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "KafkaProducer.cs",
-              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaProducer.cs",
-              "RelativeDocumentMoniker": "MovieStoreB.DL\\Kafka\\KafkaProducer.cs",
-              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaProducer.cs",
-              "RelativeToolTip": "MovieStoreB.DL\\Kafka\\KafkaProducer.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAQwFoAAAABAAAAAAAAAA==",
+              "Title": "KafkaCacheConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaCacheConsumer.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.DL\\Kafka\\KafkaCacheConsumer.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaCacheConsumer.cs",
+              "RelativeToolTip": "MovieStoreB.DL\\Kafka\\KafkaCacheConsumer.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAQwHYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T13:43:04.259Z",
+              "WhenOpened": "2025-06-04T14:34:17.77Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "KafkaConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "RelativeToolTip": "MovieStoreB.DL\\Kafka\\KafkaConsumer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T14:33:48.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "KafkaProducer.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaProducer.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.DL\\Kafka\\KafkaProducer.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\Kafka\\KafkaProducer.cs",
+              "RelativeToolTip": "MovieStoreB.DL\\Kafka\\KafkaProducer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T14:33:33.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Movie.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.Models\\DTO\\Movie.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.Models\\DTO\\Movie.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.Models\\DTO\\Movie.cs",
+              "RelativeToolTip": "MovieStoreB.Models\\DTO\\Movie.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T14:13:55.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Actor.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.Models\\DTO\\Actor.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.Models\\DTO\\Actor.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.Models\\DTO\\Actor.cs",
+              "RelativeToolTip": "MovieStoreB.Models\\DTO\\Actor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T14:13:47.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CacheItem.cs",
+              "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.Models\\DTO\\CacheItem.cs",
+              "RelativeDocumentMoniker": "MovieStoreB.Models\\DTO\\CacheItem.cs",
+              "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.Models\\DTO\\CacheItem.cs",
+              "RelativeToolTip": "MovieStoreB.Models\\DTO\\CacheItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T14:13:36.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB\\Program.cs",
               "RelativeDocumentMoniker": "MovieStoreB\\Program.cs",
               "ToolTip": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB\\Program.cs",
               "RelativeToolTip": "MovieStoreB\\Program.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAQwFMAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-04T13:42:49.806Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB\\appsettings.json",
               "RelativeDocumentMoniker": "MovieStoreB\\appsettings.json",
@@ -68,12 +153,11 @@
               "RelativeToolTip": "MovieStoreB\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-04T13:42:38.82Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T13:42:38.82Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB.DL\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "MovieStoreB.DL\\DependencyInjection.cs",
@@ -81,12 +165,11 @@
               "RelativeToolTip": "MovieStoreB.DL\\DependencyInjection.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAmwEgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T13:42:24.22Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T13:42:24.22Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "MovieStoreB.csproj",
               "DocumentMoniker": "C:\\Users\\asens\\GitHub\\Movie_store_project\\MovieStoreB\\MovieStoreB\\MovieStoreB.csproj",
               "RelativeDocumentMoniker": "MovieStoreB\\MovieStoreB.csproj",

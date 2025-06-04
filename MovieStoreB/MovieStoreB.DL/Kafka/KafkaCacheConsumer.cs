@@ -35,6 +35,7 @@ namespace MovieStoreB.DL.Kafka
                 PropertyNameCaseInsensitive = true
             };
 
+            // Updated config to match tutor's working version
             _config = new ConsumerConfig()
             {
                 BootstrapServers = "kafka-193981-0.cloudclusters.net:10300",
@@ -42,8 +43,8 @@ namespace MovieStoreB.DL.Kafka
                 SaslMechanism = SaslMechanism.Plain,
                 SaslUsername = "admin",
                 SaslPassword = "CPxpKSRD",
-                EnableSslCertificateVerification = false,
-                GroupId = $"{typeof(TData).Name.ToLower()}_cache_consumer",
+                // Removed EnableSslCertificateVerification = false to match tutor's code
+                GroupId = $"MovieStore-{typeof(TData).Name.ToLower()}-{Guid.NewGuid()}", // Updated pattern
                 AutoOffsetReset = AutoOffsetReset.Earliest,
                 EnableAutoCommit = false
             };
@@ -75,6 +76,11 @@ namespace MovieStoreB.DL.Kafka
                     try
                     {
                         var consumeResult = _consumer.Consume(TimeSpan.FromSeconds(5));
+
+                        if (consumeResult?.IsPartitionEOF == true)
+                        {
+                            continue;
+                        }
 
                         if (consumeResult?.Message?.Value != null)
                         {

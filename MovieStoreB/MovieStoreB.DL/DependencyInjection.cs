@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MovieStoreB.DL.Cache;
+using MovieStoreB.DL.Gateways;  // ADD THIS
 using MovieStoreB.DL.Interfaces;
 using MovieStoreB.DL.Kafka;
 using MovieStoreB.DL.Repositories.MongoRepositories;
@@ -12,21 +13,25 @@ namespace MovieStoreB.DL
     {
         public static IServiceCollection AddDataDependencies(this IServiceCollection services, IConfiguration config)
         {
-            // Register repositories
+            // Your existing repository registrations
             services.AddSingleton<IMovieRepository, MoviesRepository>();
             services.AddSingleton<IActorRepository, ActorMongoRepository>();
 
-            // Register in-memory cache services
+            // Your existing in-memory cache services
             services.AddSingleton<IInMemoryCacheService<Movie, string>, InMemoryCacheService<Movie, string>>();
             services.AddSingleton<IInMemoryCacheService<Actor, string>, InMemoryCacheService<Actor, string>>();
 
-            // Register cache services
+            // ADD THIS LINE - Register the ActorBioGateway
+            services.AddSingleton<IActorBioGateway, ActorBioGateway>();
+
+            // Your existing cache services (KEEP ALL OF THIS)
             services.AddCache<MoviesCacheConfiguration, MoviesRepository, Movie, string>(config);
             services.AddCache<ActorsCacheConfiguration, ActorMongoRepository, Actor, string>(config);
 
             return services;
         }
 
+        // Your existing AddCache method (KEEP AS IS)
         public static IServiceCollection AddCache<TCacheConfiguration, TCacheRepository, TData, TKey>(
             this IServiceCollection services, IConfiguration config)
             where TCacheConfiguration : CacheConfiguration
@@ -57,6 +62,7 @@ namespace MovieStoreB.DL
         }
     }
 
+    // Your existing configurations (KEEP AS IS)
     public class MoviesCacheConfiguration : CacheConfiguration
     {
     }

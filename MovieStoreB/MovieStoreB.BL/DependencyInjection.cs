@@ -8,16 +8,13 @@ namespace MovieStoreB.BL
     {
         public static IServiceCollection AddBusinessDependencies(this IServiceCollection services)
         {
-            // Register services
+            // Register all your services
             services.AddSingleton<IMovieService, MovieService>();
             services.AddSingleton<IActorService, ActorService>();
             services.AddSingleton<IBlMovieService, BlMovieService>();
 
             // Register enhanced movie service separately (not as IMovieService)
             services.AddSingleton<EnhancedMovieService>();
-
-            // Register external API service with HttpClient
-            services.AddHttpClient<IExternalApiService, ExternalApiService>();
 
             return services;
         }

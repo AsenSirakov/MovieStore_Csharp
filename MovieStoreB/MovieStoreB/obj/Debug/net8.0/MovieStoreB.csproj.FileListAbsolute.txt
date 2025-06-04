@@ -89,3 +89,4 @@ C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB\obj\Debug\net8
 C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB\obj\Debug\net8.0\MovieStoreB.genruntimeconfig.cache
 C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB\obj\Debug\net8.0\ref\MovieStoreB.dll
 C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB\obj\Debug\net8.0\MovieStoreB.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\asens\GitHub\Movie_store_project\MovieStoreB\MovieStoreB\bin\Debug\net8.0\RestSharp.dll

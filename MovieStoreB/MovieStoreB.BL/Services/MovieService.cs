@@ -8,15 +8,19 @@ namespace MovieStoreB.BL.Services
     {
         private readonly IMovieRepository _movieRepository;
         private readonly IActorRepository _actorRepository;
+        private readonly IActorBioGateway _actorBioGateway;
 
-        public MovieService(IMovieRepository movieRepository, IActorRepository actorRepository)
+        public MovieService(IMovieRepository movieRepository, IActorRepository actorRepository, IActorBioGateway actorBioGateway)
         {
             _movieRepository = movieRepository;
             _actorRepository = actorRepository;
+            _actorBioGateway = actorBioGateway;
         }
 
         public async Task<List<Movie>> GetMovies()
         {
+            var testBio = await _actorBioGateway.GetBioByActorId("1");
+            var testBio2 = await _actorBioGateway.GetBioByActor(new Actor());
             return await _movieRepository.GetMovies();
         }
 

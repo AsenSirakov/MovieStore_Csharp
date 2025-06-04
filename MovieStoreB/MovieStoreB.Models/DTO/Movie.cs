@@ -17,7 +17,9 @@ namespace MovieStoreB.Models.DTO
         [Key(3)]
         public List<string> ActorIds { get; set; } = new List<string>();
 
-       
+        [Key(4)]
+        public override DateTime DateInserted { get; set; }
+
         public override string GetKey() => Id;
     }
 }

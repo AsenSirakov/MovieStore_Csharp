@@ -19,18 +19,19 @@ namespace MovieStoreB.DL.Kafka
             _logger = logger;
             _defaultTopic = typeof(TData).Name.ToLower() + "_cache";
 
+            // Updated config to match tutor's working version
             _config = new ProducerConfig()
             {
                 BootstrapServers = "kafka-193981-0.cloudclusters.net:10300",
                 SecurityProtocol = SecurityProtocol.SaslSsl,
                 SaslMechanism = SaslMechanism.Plain,
                 SaslUsername = "admin",
-                SaslPassword = "CPxpKSRD",
-                EnableSslCertificateVerification = false
+                SaslPassword = "CPxpKSRD"
+                // Removed EnableSslCertificateVerification = false to match tutor's code
             };
 
             _producer = new ProducerBuilder<TKey, TData>(_config)
-                .SetValueSerializer(new MsgPackSerializer<TData>()) 
+                .SetValueSerializer(new MsgPackSerializer<TData>())
                 .SetErrorHandler((_, e) => _logger.LogError("Kafka producer error: {Error}", e.Reason))
                 .Build();
         }

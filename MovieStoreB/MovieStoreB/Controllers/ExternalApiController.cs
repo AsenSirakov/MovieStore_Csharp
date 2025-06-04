@@ -18,7 +18,7 @@ namespace MovieStoreB.Controllers
 
         public ExternalApiController(
             IExternalApiService externalApiService,
-            IMovieService movieService, // Changed from EnhancedMovieService
+            IMovieService movieService, 
             IInMemoryCacheService<Movie, string> movieCacheService,
             IInMemoryCacheService<Actor, string> actorCacheService,
             ILogger<ExternalApiController> logger)

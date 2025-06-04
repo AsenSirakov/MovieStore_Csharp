@@ -1,9 +1,7 @@
-﻿// Update your KafkaProducer.cs - replace the entire file content:
-
-using Confluent.Kafka;
+﻿using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
 using MovieStoreB.Models.DTO;
-using System.Text.Json;
+using MovieStoreB.Models.Serialization;
 
 namespace MovieStoreB.DL.Kafka
 {
@@ -12,21 +10,14 @@ namespace MovieStoreB.DL.Kafka
         where TKey : notnull
     {
         private readonly ProducerConfig _config;
-        private readonly IProducer<TKey, string> _producer; // Changed to string value
+        private readonly IProducer<TKey, TData> _producer;
         private readonly ILogger<KafkaProducer<TKey, TData>> _logger;
         private readonly string _defaultTopic;
-        private readonly JsonSerializerOptions _jsonOptions;
 
         public KafkaProducer(ILogger<KafkaProducer<TKey, TData>> logger)
         {
             _logger = logger;
             _defaultTopic = typeof(TData).Name.ToLower() + "_cache";
-
-            _jsonOptions = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = false
-            };
 
             _config = new ProducerConfig()
             {
@@ -38,7 +29,8 @@ namespace MovieStoreB.DL.Kafka
                 EnableSslCertificateVerification = false
             };
 
-            _producer = new ProducerBuilder<TKey, string>(_config)
+            _producer = new ProducerBuilder<TKey, TData>(_config)
+                .SetValueSerializer(new MsgPackSerializer<TData>()) 
                 .SetErrorHandler((_, e) => _logger.LogError("Kafka producer error: {Error}", e.Reason))
                 .Build();
         }
@@ -47,12 +39,10 @@ namespace MovieStoreB.DL.Kafka
         {
             try
             {
-                var json = JsonSerializer.Serialize(message, _jsonOptions);
-
-                await _producer.ProduceAsync(_defaultTopic, new Message<TKey, string>
+                await _producer.ProduceAsync(_defaultTopic, new Message<TKey, TData>
                 {
                     Key = message.GetKey(),
-                    Value = json
+                    Value = message
                 });
 
                 _logger.LogDebug("Successfully produced message to topic {Topic}", _defaultTopic);

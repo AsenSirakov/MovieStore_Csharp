@@ -43,7 +43,7 @@ namespace MovieStoreB.BL.Services
                         Actors = new List<Actor>()
                     };
 
-                    // FIXED: Actually add actors to the result
+                    
                     if (movie.ActorIds?.Any() == true)
                     {
                         foreach (var actorId in movie.ActorIds)
@@ -52,7 +52,7 @@ namespace MovieStoreB.BL.Services
 
                             if (actor != null)
                             {
-                                movieDetails.Actors.Add(actor); // ← NOW actors are actually added!
+                                movieDetails.Actors.Add(actor); 
                                 _logger.LogDebug("Added actor {ActorName} to movie {MovieTitle}", actor.Name, movie.Title);
                             }
                             else

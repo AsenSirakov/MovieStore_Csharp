@@ -51,7 +51,7 @@ namespace MovieStoreB.BL.Services
             return await _movieRepository.GetMoviesById(movieId.ToString());
         }
 
-        // FIXED: Logic bug in AddActor method
+        
         public async Task AddActor(string movieId, Actor actor)
         {
             if (string.IsNullOrEmpty(movieId) || actor == null) return;
@@ -71,13 +71,13 @@ namespace MovieStoreB.BL.Services
 
             var existingActor = await _actorRepository.GetById(actor.Id);
 
-            // FIXED: Should be "if actor DOESN'T exist, add it first"
+            
             if (existingActor == null)
             {
                 await _actorRepository.AddActor(actor);
             }
 
-            // Add actor to movie if not already there
+            
             if (!movie.ActorIds.Contains(actor.Id))
             {
                 movie.ActorIds.Add(actor.Id);

@@ -1,16 +1,25 @@
 ﻿using Confluent.Kafka;
+using Microsoft.Extensions.Options;
 using MovieStoreB.Models.DTO;
 using MovieStoreB.Models.Serialization;
+using Microsoft.Extensions.Logging;
 
 namespace MovieStoreB.DL.Kafka
 {
-    internal class KafkaProducer<TKey, TData> : IKafkaProducer<TData> where TData : CacheItem<TKey> where TKey : notnull
+    internal class KafkaProducer<TKey, TData> : IKafkaProducer<TData>
+        where TData : CacheItem<TKey>
+        where TKey : notnull
     {
         private readonly ProducerConfig _config;
         private readonly IProducer<TKey, TData> _producer;
+        private readonly ILogger<KafkaProducer<TKey, TData>> _logger;
+        private readonly string _defaultTopic;
 
-        public KafkaProducer()
+        public KafkaProducer(ILogger<KafkaProducer<TKey, TData>> logger)
         {
+            _logger = logger;
+            _defaultTopic = typeof(TData).Name.ToLower() + "_cache";
+
             _config = new ProducerConfig()
             {
                 BootstrapServers = "kafka-193981-0.cloudclusters.net:10300",
@@ -23,22 +32,32 @@ namespace MovieStoreB.DL.Kafka
 
             _producer = new ProducerBuilder<TKey, TData>(_config)
                 .SetValueSerializer(new MsgPackSerializer<TData>())
+                .SetErrorHandler((_, e) => _logger.LogError("Kafka producer error: {Error}", e.Reason))
                 .Build();
         }
 
         public async Task Produce(TData message)
         {
-            await _producer.ProduceAsync("test", new Message<TKey, TData>
+            try
             {
-                Key = message.GetKey(),
-                Value = message
-            });
+                await _producer.ProduceAsync(_defaultTopic, new Message<TKey, TData>
+                {
+                    Key = message.GetKey(),
+                    Value = message
+                });
+
+                _logger.LogDebug("Successfully produced message to topic {Topic}", _defaultTopic);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error producing message to topic {Topic}", _defaultTopic);
+                throw;
+            }
         }
 
         public async Task ProduceAll(IEnumerable<TData> messages)
         {
             var tasks = messages.Select(message => Produce(message));
-
             await Task.WhenAll(tasks);
         }
 
@@ -58,12 +77,15 @@ namespace MovieStoreB.DL.Kafka
                 }
             }
 
-            // Process any remaining messages
             if (batch.Count > 0)
             {
                 await Task.WhenAll(batch);
             }
         }
 
+        public void Dispose()
+        {
+            _producer?.Dispose();
+        }
     }
 }

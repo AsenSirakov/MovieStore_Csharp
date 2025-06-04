@@ -10,39 +10,49 @@ using MovieStoreB.HealthChecks;
 using MovieStoreB.ServiceExtensions;
 using MessagePack;
 using MessagePack.Resolvers;
-using MovieStoreB.Models.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
-    .WriteTo.Console(theme:
-        AnsiConsoleTheme.Code)
+    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
     .CreateLogger();
 
 builder.Logging.AddSerilog(logger);
 
-// 🔥 FIXED MESSAGEPACK CONFIGURATION (removed GeneratedResolver):
-StaticCompositeResolver.Instance.Register(
-    StandardResolver.Instance
-);
-
-var options = MessagePackSerializerOptions.Standard
-    .WithResolver(StaticCompositeResolver.Instance);
-
-MessagePackSerializer.DefaultOptions = options;
-
-// Test serialization
+// 🔥 BETTER MESSAGEPACK CONFIGURATION:
 try
 {
-    var testMovie = new Movie { Id = "test", Title = "Test Movie", Year = 2024 };
+    var resolver = CompositeResolver.Create(
+        BuiltinResolver.Instance,
+        AttributeFormatterResolver.Instance,
+        PrimitiveObjectResolver.Instance,
+        StandardResolver.Instance
+    );
+
+    var options = MessagePackSerializerOptions.Standard
+        .WithResolver(resolver);
+
+    MessagePackSerializer.DefaultOptions = options;
+
+    // Test serialization to ensure it works
+    var testMovie = new MovieStoreB.Models.DTO.Movie
+    {
+        Id = "test-123",
+        Title = "Test Movie",
+        Year = 2024,
+        ActorIds = new List<string> { "actor1", "actor2" }
+    };
+
     var serialized = MessagePackSerializer.Serialize(testMovie);
-    var deserialized = MessagePackSerializer.Deserialize<Movie>(serialized);
-    logger.Information("MessagePack serialization test successful!");
+    var deserialized = MessagePackSerializer.Deserialize<MovieStoreB.Models.DTO.Movie>(serialized);
+
+    logger.Information("✅ MessagePack configuration successful! Test movie: {Title}", deserialized.Title);
 }
 catch (Exception ex)
 {
-    logger.Error(ex, "MessagePack serialization test failed!");
+    logger.Error(ex, "❌ MessagePack configuration failed! App will continue but Kafka may not work.");
+    // Don't throw - let app start even if MessagePack fails
 }
 
 // Add services to the container.

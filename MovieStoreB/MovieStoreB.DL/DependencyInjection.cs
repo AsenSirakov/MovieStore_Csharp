@@ -16,23 +16,13 @@ namespace MovieStoreB.DL
             services.AddSingleton<IMovieRepository, MoviesRepository>();
             services.AddSingleton<IActorRepository, ActorMongoRepository>();
 
-<<<<<<< Updated upstream
-            //services.AddHostedService<MongoCacheDistributor>();
-            //services.AddSingleton<ICacheRepository<Movie>, MoviesRepository>();
-
-            services.AddCache<MoviesCacheConfiguration, MoviesRepository, Movie, string>(config);
-            services.AddCache<ActorsCacheConfiguration, ActorMongoRepository, Actor, string>(config);
-
-            //services.AddHostedService<MongoCachePopulator<Movie, IMovieRepository>>();
-=======
-            // Register cache services
-            services.AddCache<MoviesCacheConfiguration, MoviesRepository, Movie, string>(config);
-            services.AddCache<ActorsCacheConfiguration, ActorMongoRepository, Actor, string>(config);
-
             // Register in-memory cache services
             services.AddSingleton<IInMemoryCacheService<Movie, string>, InMemoryCacheService<Movie, string>>();
             services.AddSingleton<IInMemoryCacheService<Actor, string>, InMemoryCacheService<Actor, string>>();
->>>>>>> Stashed changes
+
+            // Register cache services
+            services.AddCache<MoviesCacheConfiguration, MoviesRepository, Movie, string>(config);
+            services.AddCache<ActorsCacheConfiguration, ActorMongoRepository, Actor, string>(config);
 
             return services;
         }
@@ -56,17 +46,12 @@ namespace MovieStoreB.DL
             // Register repositories and producers
             services.AddSingleton<ICacheRepository<TData>, TCacheRepository>();
             services.AddSingleton<IKafkaProducer<TData>, KafkaProducer<TKey, TData>>();
-<<<<<<< Updated upstream
-            services.AddHostedService<MongoCachePopulator<TData, ICacheRepository<TData>, TCacheConfiguration, TKey>>();
-=======
 
             // Register Kafka Cache Distributor (publishes to Kafka)
             services.AddHostedService<KafkaCacheDistributor<TData, ICacheRepository<TData>, TCacheConfiguration, TKey>>();
 
             // Register Kafka Cache Consumer (reads from Kafka and updates in-memory cache)
             services.AddHostedService<KafkaCacheConsumer<TData, TKey, TCacheConfiguration>>();
->>>>>>> Stashed changes
-
 
             return services;
         }

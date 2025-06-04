@@ -1,5 +1,4 @@
-﻿using MapsterMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MovieStoreB.BL.Interfaces;
 using MovieStoreB.Models.DTO;
 using MovieStoreB.Models.Requests;
@@ -11,11 +10,11 @@ namespace MovieStoreB.Controllers
     public class MoviesBlController : ControllerBase
     {
         private readonly IMovieService _movieService;
-        private readonly ILogger<MoviesController> _logger;
+        private readonly ILogger<MoviesBlController> _logger;
 
         public MoviesBlController(
             IMovieService movieService,
-            ILogger<MoviesController> logger)
+            ILogger<MoviesBlController> logger)
         {
             _movieService = movieService;
             _logger = logger;
@@ -24,38 +23,28 @@ namespace MovieStoreB.Controllers
         [HttpPost("TestFluentValid")]
         public async Task<IActionResult> TestFluentValid([FromBody] TestRequest movieRequest)
         {
-            //if (movieRequest == null) return BadRequest();
-
-            //if (movieRequest.Id <= 0) return BadRequest();
-
-            //if (movieRequest.Title == null) return BadRequest();
-
-            //if (string.IsNullOrWhiteSpace(movieRequest.Title)) return BadRequest(); 
-
-            //if (movieRequest.Title.Length <= 1 || movieRequest.Title.Length > 50) return BadRequest();
-
             return Ok();
         }
 
         [HttpGet("GetAll")]
-        public async Task<IEnumerable<Movie>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-               return await _movieService.GetMovies();
+                var movies = await _movieService.GetMovies();
+                return Ok(movies);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, $"Error in GetAll {e.Message}-{e.StackTrace}");
+                return StatusCode(500, "Internal server error");
             }
-            return await _movieService.GetMovies();
         }
     }
 
     public class TestRequest
     {
         public int Id { get; set; }
-
         public string Title { get; set; }
     }
 }

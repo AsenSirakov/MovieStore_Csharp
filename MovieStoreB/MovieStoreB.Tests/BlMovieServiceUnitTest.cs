@@ -3,13 +3,15 @@ using MovieStoreB.BL.Interfaces;
 using MovieStoreB.BL.Services;
 using MovieStoreB.DL.Interfaces;
 using MovieStoreB.Models.DTO;
+using Microsoft.Extensions.Logging;
 
 namespace MovieStoreB.Tests
 {
     public class BlMovieServiceUnitTest
     {
         private readonly Mock<IMovieService> _movieServiceMock;
-        private readonly Mock<IActorRepository> _actorRepositoryMock;
+        private readonly Mock<IActorService> _actorServiceMock; // Changed from IActorRepository to IActorService
+        private readonly Mock<ILogger<BlMovieService>> _loggerMock; // Added logger mock
 
         private List<Movie> _movies = new List<Movie>()
         {
@@ -36,24 +38,16 @@ namespace MovieStoreB.Tests
 
         private List<Actor> _actors = new List<Actor>
         {
-            new Actor(default, default) {
-                Id = "157af604-7a4b-4538-b6a9-fed41a41cf3a",
-                Name = "Actor 1"
-            },
-            new Actor(default, default) {
-                Id = "baac2b19-bbd2-468d-bd3b-5bd18aba98d7",
-                Name = "Actor 2"
-            },
-            new Actor(default, default) {
-                Id = "5c93ba13-e803-49c1-b465-d471607e97b3",
-                Name = "Actor 3"
-            },
+            new Actor("157af604-7a4b-4538-b6a9-fed41a41cf3a", "Actor 1"),
+            new Actor("baac2b19-bbd2-468d-bd3b-5bd18aba98d7", "Actor 2"),
+            new Actor("5c93ba13-e803-49c1-b465-d471607e97b3", "Actor 3"),
         };
 
         public BlMovieServiceUnitTest()
         {
             _movieServiceMock = new Mock<IMovieService>();
-            _actorRepositoryMock = new Mock<IActorRepository>();
+            _actorServiceMock = new Mock<IActorService>(); // Changed to IActorService
+            _loggerMock = new Mock<ILogger<BlMovieService>>(); // Added logger mock
         }
 
         [Fact]
@@ -66,16 +60,18 @@ namespace MovieStoreB.Tests
                 .Setup(x => x.GetMovies())
                 .ReturnsAsync(_movies);
 
-            _actorRepositoryMock
-                .Setup(repo =>
-                    repo.GetById(It.IsAny<string>()))
-                    .Returns((string id) =>
+            // Changed to use IActorService.GetActorById instead of IActorRepository.GetById
+            _actorServiceMock
+                .Setup(service =>
+                    service.GetActorById(It.IsAny<string>()))
+                    .ReturnsAsync((string id) =>
                         _actors.FirstOrDefault(x => x.Id == id));
 
-            //inject
+            //inject - Added logger to constructor
             var blMovieService = new BlMovieService(
                 _movieServiceMock.Object,
-                _actorRepositoryMock.Object);
+                _actorServiceMock.Object,
+                _loggerMock.Object);
 
             //act
             var result = await
@@ -84,6 +80,10 @@ namespace MovieStoreB.Tests
             //assert
             Assert.NotNull(result);
             Assert.Equal(expectedCount, result.Count);
+
+            // Additional assertions to verify actors are included
+            Assert.True(result.All(movie => movie.Actors != null));
+            Assert.True(result.First().Actors.Count > 0); // Verify actors are actually added
         }
     }
 }

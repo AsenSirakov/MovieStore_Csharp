@@ -25,13 +25,36 @@ namespace MovieStoreB.DL.Repositories.MongoRepositories
             _actorsCollection = database.GetCollection<Actor>($"{nameof(Actor)}s");
         }
 
-        // Add this missing method required by IActorRepository
         public async Task<IEnumerable<Actor>> GetAllActors()
         {
             var result = await _actorsCollection.FindAsync(m => true);
             return await result.ToListAsync();
         }
 
+        public async Task<Actor?> GetById(string id)
+        {
+            var result = await _actorsCollection.FindAsync(m => m.Id == id);
+            return await result.FirstOrDefaultAsync();
+        }
+
+        public async Task AddActor(Actor actor)
+        {
+            actor.Id = Guid.NewGuid().ToString();
+            actor.DateInserted = DateTime.UtcNow;
+            await _actorsCollection.InsertOneAsync(actor);
+        }
+
+        public async Task UpdateActor(Actor actor)
+        {
+            await _actorsCollection.ReplaceOneAsync(a => a.Id == actor.Id, actor);
+        }
+
+        public async Task DeleteActor(string id)
+        {
+            await _actorsCollection.DeleteOneAsync(a => a.Id == id);
+        }
+
+        // ICacheRepository implementation
         public async Task<IEnumerable<Actor?>> DifLoad(DateTime lastExecuted)
         {
             var result = await _actorsCollection.FindAsync(m => m.DateInserted >= lastExecuted);
@@ -42,12 +65,6 @@ namespace MovieStoreB.DL.Repositories.MongoRepositories
         {
             var result = await _actorsCollection.FindAsync(m => true);
             return await result.ToListAsync();
-        }
-
-        public async Task<Actor?> GetById(string id)
-        {
-            var result = await _actorsCollection.FindAsync(m => m.Id == id);
-            return await result.FirstOrDefaultAsync();
         }
     }
 }

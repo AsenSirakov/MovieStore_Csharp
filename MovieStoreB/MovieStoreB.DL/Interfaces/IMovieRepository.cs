@@ -1,5 +1,4 @@
-﻿
-using MovieStoreB.DL.Cache;
+﻿using MovieStoreB.DL.Cache;
 using MovieStoreB.Models.DTO;
 
 namespace MovieStoreB.DL.Interfaces
@@ -8,11 +7,13 @@ namespace MovieStoreB.DL.Interfaces
     {
         Task<List<Movie>> GetMovies();
 
-        void AddMovie(Movie movie);
+        Task AddMovie(Movie movie);
 
-        void DeleteMovie(string id);
+        Task DeleteMovie(string id);
 
-        Movie? GetMoviesById(string id);
+        Task<Movie?> GetMoviesById(string id);
+
+        Task UpdateMovie(Movie movie); // Added missing method
 
         Task<IEnumerable<Movie?>> GetMoviesAfterDateTime(DateTime date);
     }

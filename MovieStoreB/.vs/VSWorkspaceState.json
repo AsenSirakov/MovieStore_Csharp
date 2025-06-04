@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\MovieStoreB.DL",
+    "\\MovieStoreB.DL\\Cache",
+    "\\MovieStoreB.DL\\Kafka",
+    "\\MovieStoreB.DL\\Repositories",
+    "\\MovieStoreB.DL\\Repositories\\MongoRepositories",
+    "\\MovieStoreB.Models",
+    "\\MovieStoreB.Models\\DTO"
+  ],
+  "SelectedNode": "\\MovieStoreB.sln",
+  "PreviewInSolutionExplorer": false
+}

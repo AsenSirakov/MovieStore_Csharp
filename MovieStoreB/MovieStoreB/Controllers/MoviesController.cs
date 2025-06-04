@@ -25,29 +25,29 @@ namespace MovieStoreB.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IEnumerable<Movie>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                await _movieService.GetMovies();
+                var movies = await _movieService.GetMovies();
+                return Ok(movies);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, $"Error in GetAll {e.Message}-{e.StackTrace}");
+                return StatusCode(500, "Internal server error");
             }
-            return await _movieService.GetMovies();
         }
 
         [HttpGet("GetById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetById(string id)
+        public async Task<IActionResult> GetById(string id)
         {
             if (string.IsNullOrEmpty(id)) return BadRequest();
 
-            var result =
-                _movieService.GetMoviesById(id);
+            var result = await _movieService.GetMoviesById(id);
 
             if (result == null) return NotFound();
 
@@ -55,21 +55,27 @@ namespace MovieStoreB.Controllers
         }
 
         [HttpPost("AddMovie")]
-        public void AddMovie(
-            [FromBody]AddMovieRequest movieRequest)
+        public async Task<IActionResult> AddMovie([FromBody] AddMovieRequest movieRequest)
         {
-            var movie = _mapper.Map<Movie>(movieRequest);
-
-            _movieService.AddMovie(movie);
+            try
+            {
+                var movie = _mapper.Map<Movie>(movieRequest);
+                await _movieService.AddMovie(movie);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error in AddMovie {e.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpDelete("Delete")]
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
-            if (!string.IsNullOrEmpty(id)) return BadRequest($"Wrong id:{id}");
+            if (string.IsNullOrEmpty(id)) return BadRequest($"Wrong id:{id}");
 
-            _movieService.DeleteMovie(id);
-
+            await _movieService.DeleteMovie(id);
             return Ok();
         }
     }

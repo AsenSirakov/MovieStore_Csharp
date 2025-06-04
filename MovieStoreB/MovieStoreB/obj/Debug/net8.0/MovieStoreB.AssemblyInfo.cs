@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MovieStoreB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3de3db8d632df7c75ba8912b35f7e7ac9ce3656d")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+926808717955fba175c8488fc85402ef86b0a696")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("MovieStoreB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MovieStoreB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -19,42 +19,46 @@ namespace MovieStoreB.DL.Repositories.MongoRepositories
             if (string.IsNullOrEmpty(mongoConfig?.CurrentValue?.ConnectionString) || string.IsNullOrEmpty(mongoConfig?.CurrentValue?.DatabaseName))
             {
                 _logger.LogError("MongoDb configuration is missing");
-
                 throw new ArgumentNullException("MongoDb configuration is missing");
             }
 
             var client = new MongoClient(mongoConfig.CurrentValue.ConnectionString);
             var database = client.GetDatabase(mongoConfig.CurrentValue.DatabaseName);
-
             _moviesCollection = database.GetCollection<Movie>($"{nameof(Movie)}s");
         }
 
-        public void AddMovie(Movie movie)
+        public async Task AddMovie(Movie movie)
         {
             movie.Id = Guid.NewGuid().ToString();
-
-            _moviesCollection.InsertOne(movie);
+            movie.DateInserted = DateTime.UtcNow;
+            await _moviesCollection.InsertOneAsync(movie);
         }
 
-        public void DeleteMovie(string id)
+        public async Task DeleteMovie(string id)
         {
-            _moviesCollection.DeleteOne(m => m.Id == id);
+            await _moviesCollection.DeleteOneAsync(m => m.Id == id);
         }
 
         public async Task<List<Movie>> GetMovies()
         {
-            return _moviesCollection.Find(m => true).ToList();
+            var result = await _moviesCollection.FindAsync(m => true);
+            return await result.ToListAsync();
         }
 
-        public Movie? GetMoviesById(string id)
+        public async Task<Movie?> GetMoviesById(string id)
         {
-            return _moviesCollection.Find(m => m.Id == id).FirstOrDefault();
+            var result = await _moviesCollection.FindAsync(m => m.Id == id);
+            return await result.FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateMovie(Movie movie)
+        {
+            await _moviesCollection.ReplaceOneAsync(m => m.Id == movie.Id, movie);
         }
 
         public async Task<IEnumerable<Movie?>> GetMoviesAfterDateTime(DateTime date)
         {
             var result = await _moviesCollection.FindAsync(m => m.DateInserted >= date);
-
             return await result.ToListAsync();
         }
 

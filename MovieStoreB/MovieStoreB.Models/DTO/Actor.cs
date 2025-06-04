@@ -1,10 +1,26 @@
-﻿namespace MovieStoreB.Models.DTO
+﻿using MessagePack;
+
+namespace MovieStoreB.Models.DTO
 {
-    public record Actor(string Id, string Name) : CacheItem<string>
+    [MessagePackObject]
+    public record Actor : CacheItem<string>
     {
-        public override string GetKey()
+        [Key(0)]
+        public string Id { get; set; } = string.Empty;
+
+        [Key(1)]
+        public string Name { get; set; } = string.Empty;
+
+        // Parameterless constructor required for MessagePack
+        public Actor() { }
+
+        public Actor(string id, string name)
         {
-            return Id;
+            Id = id;
+            Name = name;
         }
+
+        // Don't serialize this method
+        public override string GetKey() => Id;
     }
 }

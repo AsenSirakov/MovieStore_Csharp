@@ -19,15 +19,11 @@ namespace MovieStoreB.DL.Kafka
             _logger = logger;
             _defaultTopic = typeof(TData).Name.ToLower() + "_cache";
 
-            // Updated config to match tutor's working version
+            // Simple configuration that works with your Confluent.Kafka version
             _config = new ProducerConfig()
             {
-                BootstrapServers = "kafka-193981-0.cloudclusters.net:10300",
-                SecurityProtocol = SecurityProtocol.SaslSsl,
-                SaslMechanism = SaslMechanism.Plain,
-                SaslUsername = "admin",
-                SaslPassword = "CPxpKSRD"
-                // Removed EnableSslCertificateVerification = false to match tutor's code
+                BootstrapServers = "localhost:9092"
+                // Keep it simple - remove properties that don't exist in your version
             };
 
             _producer = new ProducerBuilder<TKey, TData>(_config)

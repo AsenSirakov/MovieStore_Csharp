@@ -35,16 +35,11 @@ namespace MovieStoreB.DL.Kafka
                 PropertyNameCaseInsensitive = true
             };
 
-            // Updated config to match tutor's working version
+            // Local Kafka configuration (no SSL/SASL)
             _config = new ConsumerConfig()
             {
-                BootstrapServers = "kafka-193981-0.cloudclusters.net:10300",
-                SecurityProtocol = SecurityProtocol.SaslSsl,
-                SaslMechanism = SaslMechanism.Plain,
-                SaslUsername = "admin",
-                SaslPassword = "CPxpKSRD",
-                // Removed EnableSslCertificateVerification = false to match tutor's code
-                GroupId = $"MovieStore-{typeof(TData).Name.ToLower()}-{Guid.NewGuid()}", // Updated pattern
+                BootstrapServers = "localhost:9092",
+                GroupId = $"MovieStore-{typeof(TData).Name.ToLower()}-{Guid.NewGuid()}",
                 AutoOffsetReset = AutoOffsetReset.Earliest,
                 EnableAutoCommit = false
             };

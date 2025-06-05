@@ -3,6 +3,7 @@ using MovieStoreB.BL.Interfaces;
 using MovieStoreB.BL.Services;
 using MovieStoreB.DL.Interfaces;
 using MovieStoreB.Models.DTO;
+using MovieStoreB.Models.Responses;
 
 namespace MovieStoreB.Tests
 {
@@ -10,6 +11,7 @@ namespace MovieStoreB.Tests
     {
         private readonly Mock<IMovieRepository> _movieRepositoryMock;
         private readonly Mock<IActorRepository> _actorRepositoryMock;
+        private readonly Mock<IActorBioGateway> _actorBioGatewayMock; // Added this
 
         private List<Movie> _movies = new List<Movie>()
         {
@@ -45,22 +47,35 @@ namespace MovieStoreB.Tests
         {
             _actorRepositoryMock = new Mock<IActorRepository>();
             _movieRepositoryMock = new Mock<IMovieRepository>();
+            _actorBioGatewayMock = new Mock<IActorBioGateway>(); // Added this
+
+            // Setup the actor bio gateway mock to return a default response
+            _actorBioGatewayMock
+                .Setup(x => x.GetBioByActorId(It.IsAny<string>()))
+                .ReturnsAsync(new ActorBioResponse { Summary = "Test bio" });
+
+            _actorBioGatewayMock
+                .Setup(x => x.GetBioByActor(It.IsAny<Actor>()))
+                .ReturnsAsync(new ActorBioResponse { Summary = "Test bio" });
         }
 
         [Fact]
-        async Task GetMoviesById_ReturnsData() // Made async
+        async Task GetMoviesById_ReturnsData()
         {
             // Arrange
             var movieId = _movies[0].Id;
 
             _movieRepositoryMock.Setup(x => x.GetMoviesById(It.IsAny<string>()))
-                    .ReturnsAsync((string id) => // Changed to ReturnsAsync
+                    .ReturnsAsync((string id) =>
                         _movies.FirstOrDefault(x => x.Id == id));
 
-            var movieService = new MovieService(_movieRepositoryMock.Object, _actorRepositoryMock.Object);
+            var movieService = new MovieService(
+                _movieRepositoryMock.Object,
+                _actorRepositoryMock.Object,
+                _actorBioGatewayMock.Object); // Added this parameter
 
             // Act
-            var result = await movieService.GetMoviesById(movieId); // Added await
+            var result = await movieService.GetMoviesById(movieId);
 
             // Assert
             Assert.NotNull(result);
@@ -68,45 +83,51 @@ namespace MovieStoreB.Tests
         }
 
         [Fact]
-        async Task GetMoviesById_MovieNotExist() // Made async
+        async Task GetMoviesById_MovieNotExist()
         {
             // Arrange
             var movieId = "c3bd1985-792e-4208-af81-4d154bff15c9";
 
             _movieRepositoryMock.Setup(x => x.GetMoviesById(It.IsAny<string>()))
-                    .ReturnsAsync((string id) => // Changed to ReturnsAsync
+                    .ReturnsAsync((string id) =>
                         _movies.FirstOrDefault(x => x.Id == id));
 
-            var movieService = new MovieService(_movieRepositoryMock.Object, _actorRepositoryMock.Object);
+            var movieService = new MovieService(
+                _movieRepositoryMock.Object,
+                _actorRepositoryMock.Object,
+                _actorBioGatewayMock.Object);
 
             // Act
-            var result = await movieService.GetMoviesById(movieId); // Added await
+            var result = await movieService.GetMoviesById(movieId);
 
             // Assert
             Assert.Null(result);
         }
 
         [Fact]
-        async Task GetMoviesById_MovieWithInvalidGuid() // Made async
+        async Task GetMoviesById_MovieWithInvalidGuid()
         {
             // Arrange
             var movieId = "c3bd1985-792e-4208-af81-4d154bff15c9-12";
 
             _movieRepositoryMock.Setup(x => x.GetMoviesById(It.IsAny<string>()))
-                    .ReturnsAsync((string id) => // Changed to ReturnsAsync
+                    .ReturnsAsync((string id) =>
                         _movies.First(x => x.Id == id));
 
-            var movieService = new MovieService(_movieRepositoryMock.Object, _actorRepositoryMock.Object);
+            var movieService = new MovieService(
+                _movieRepositoryMock.Object,
+                _actorRepositoryMock.Object,
+                _actorBioGatewayMock.Object);
 
             // Act
-            var result = await movieService.GetMoviesById(movieId); // Added await
+            var result = await movieService.GetMoviesById(movieId);
 
             // Assert
             Assert.Null(result);
         }
 
         [Fact]
-        async Task AddMovie_ValidMovie_AddsSuccessfully() // New test for async AddMovie
+        async Task AddMovie_ValidMovie_AddsSuccessfully()
         {
             // Arrange
             var newMovie = new Movie
@@ -119,7 +140,10 @@ namespace MovieStoreB.Tests
             _movieRepositoryMock.Setup(x => x.AddMovie(It.IsAny<Movie>()))
                 .Returns(Task.CompletedTask);
 
-            var movieService = new MovieService(_movieRepositoryMock.Object, _actorRepositoryMock.Object);
+            var movieService = new MovieService(
+                _movieRepositoryMock.Object,
+                _actorRepositoryMock.Object,
+                _actorBioGatewayMock.Object);
 
             // Act
             await movieService.AddMovie(newMovie);
@@ -129,7 +153,7 @@ namespace MovieStoreB.Tests
         }
 
         [Fact]
-        async Task DeleteMovie_ValidId_DeletesSuccessfully() // New test for async DeleteMovie
+        async Task DeleteMovie_ValidId_DeletesSuccessfully()
         {
             // Arrange
             var movieId = "c3bd1985-792e-4208-af81-4d154bff15c8";
@@ -137,13 +161,40 @@ namespace MovieStoreB.Tests
             _movieRepositoryMock.Setup(x => x.DeleteMovie(It.IsAny<string>()))
                 .Returns(Task.CompletedTask);
 
-            var movieService = new MovieService(_movieRepositoryMock.Object, _actorRepositoryMock.Object);
+            var movieService = new MovieService(
+                _movieRepositoryMock.Object,
+                _actorRepositoryMock.Object,
+                _actorBioGatewayMock.Object);
 
             // Act
             await movieService.DeleteMovie(movieId);
 
             // Assert
             _movieRepositoryMock.Verify(x => x.DeleteMovie(movieId), Times.Once);
+        }
+
+        [Fact]
+        async Task GetMovies_CallsActorBioGateway_ReturnsMovies()
+        {
+            // Arrange
+            _movieRepositoryMock.Setup(x => x.GetMovies())
+                .ReturnsAsync(_movies);
+
+            var movieService = new MovieService(
+                _movieRepositoryMock.Object,
+                _actorRepositoryMock.Object,
+                _actorBioGatewayMock.Object);
+
+            // Act
+            var result = await movieService.GetMovies();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(_movies.Count, result.Count);
+
+            // Verify that the actor bio gateway was called
+            _actorBioGatewayMock.Verify(x => x.GetBioByActorId("1"), Times.Once);
+            _actorBioGatewayMock.Verify(x => x.GetBioByActor(It.IsAny<Actor>()), Times.Once);
         }
     }
 }

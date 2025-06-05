@@ -13,19 +13,25 @@ namespace MovieStoreB.BL
             // Register HttpClient for ExternalApiService
             services.AddHttpClient<ExternalApiService>();
 
-            // Register all your services
-            services.AddSingleton<IMovieService, MovieService>();
+            // Register core services - CHOOSE ONE MOVIE SERVICE IMPLEMENTATION
+            // Option 1: Use basic MovieService
+            // services.AddSingleton<IMovieService, MovieService>();
+
+            // Option 2: Use EnhancedMovieService (recommended)
+            services.AddSingleton<IMovieService, EnhancedMovieService>();
+
+            // Register other services
             services.AddSingleton<IActorService, ActorService>();
             services.AddSingleton<IBlMovieService, BlMovieService>();
 
             // Register ExternalApiService
             services.AddSingleton<IExternalApiService, ExternalApiService>();
 
-            // Register ActorBioGateway - THIS WAS MISSING!
+            // Register ActorBioGateway
             services.AddSingleton<IActorBioGateway, ActorBioGateway>();
 
-            // Register enhanced movie service separately
-            services.AddSingleton<EnhancedMovieService>();
+            // DO NOT register EnhancedMovieService separately when it's already implementing IMovieService
+            // services.AddSingleton<EnhancedMovieService>(); // REMOVE THIS LINE
 
             return services;
         }

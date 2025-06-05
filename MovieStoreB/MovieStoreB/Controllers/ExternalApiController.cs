@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieStoreB.BL.Interfaces;
-using MovieStoreB.BL.Services;
 using MovieStoreB.DL.Cache;
 using MovieStoreB.Models.DTO;
 
@@ -11,14 +10,14 @@ namespace MovieStoreB.Controllers
     public class ExternalApiController : ControllerBase
     {
         private readonly IExternalApiService _externalApiService;
-        private readonly IMovieService _movieService; // Use interface instead of concrete class
+        private readonly IMovieService _movieService;
         private readonly IInMemoryCacheService<Movie, string> _movieCacheService;
         private readonly IInMemoryCacheService<Actor, string> _actorCacheService;
         private readonly ILogger<ExternalApiController> _logger;
 
         public ExternalApiController(
             IExternalApiService externalApiService,
-            IMovieService movieService, 
+            IMovieService movieService,
             IInMemoryCacheService<Movie, string> movieCacheService,
             IInMemoryCacheService<Actor, string> actorCacheService,
             ILogger<ExternalApiController> logger)
@@ -35,7 +34,26 @@ namespace MovieStoreB.Controllers
         {
             try
             {
-                // Get external movies and add them manually
+                // Use the interface method
+                await _movieService.ImportMoviesFromExternalApi();
+                return Ok(new { message = "Successfully imported movies from external API" });
+            }
+            catch (NotImplementedException)
+            {
+                // Fallback to manual import if using basic MovieService
+                return await ImportMoviesManually();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error importing movies from external API");
+                return StatusCode(500, new { error = "Failed to import movies" });
+            }
+        }
+
+        private async Task<IActionResult> ImportMoviesManually()
+        {
+            try
+            {
                 var externalMovies = await _externalApiService.GetMoviesFromExternalApi();
 
                 foreach (var externalMovie in externalMovies)
@@ -56,8 +74,8 @@ namespace MovieStoreB.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error importing movies from external API");
-                return StatusCode(500, new { error = "Failed to import movies" });
+                _logger.LogError(ex, "Error in manual movie import");
+                return StatusCode(500, new { error = "Failed to import movies manually" });
             }
         }
 

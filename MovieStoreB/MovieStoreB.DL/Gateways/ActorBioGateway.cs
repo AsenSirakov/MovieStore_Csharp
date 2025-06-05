@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace MovieStoreB.DL.Gateways
 {
-    internal class ActorBioGateway : IActorBioGateway
+    public class ActorBioGateway : IActorBioGateway
     {
         private readonly RestClient _client;
 

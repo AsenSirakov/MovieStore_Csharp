@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MovieStoreB.BL.Interfaces;
 using MovieStoreB.BL.Services;
+using MovieStoreB.DL.Interfaces;
+using MovieStoreB.DL.Gateways;
 
 namespace MovieStoreB.BL
 {
@@ -16,10 +18,13 @@ namespace MovieStoreB.BL
             services.AddSingleton<IActorService, ActorService>();
             services.AddSingleton<IBlMovieService, BlMovieService>();
 
-            // Register ExternalApiService - this was missing!
+            // Register ExternalApiService
             services.AddSingleton<IExternalApiService, ExternalApiService>();
 
-            // Register enhanced movie service separately (not as IMovieService)
+            // Register ActorBioGateway - THIS WAS MISSING!
+            services.AddSingleton<IActorBioGateway, ActorBioGateway>();
+
+            // Register enhanced movie service separately
             services.AddSingleton<EnhancedMovieService>();
 
             return services;

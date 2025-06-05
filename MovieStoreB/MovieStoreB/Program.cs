@@ -22,6 +22,8 @@ builder.Logging.AddSerilog(logger);
 
 try
 {
+    logger.Information("Starting MovieStoreB application configuration...");
+
     // StandardResolver which handles [MessagePackObject] attributes automatically
     var options = MessagePackSerializerOptions.Standard
         .WithResolver(StandardResolver.Instance)
@@ -42,38 +44,52 @@ try
     var serialized = MessagePackSerializer.Serialize(testMovie);
     var deserialized = MessagePackSerializer.Deserialize<MovieStoreB.Models.DTO.Movie>(serialized);
 
-    logger.Information(" MessagePack configuration successful! Test movie: {Title}", deserialized.Title);
+    logger.Information("MessagePack configuration successful! Test movie: {Title}", deserialized.Title);
+
+    // Add services to the container
+    logger.Information("Configuring services...");
+
+    builder.Services
+        .AddConfigurations(builder.Configuration)
+        .AddDataDependencies(builder.Configuration)
+        .AddBusinessDependencies();
+
+    builder.Services.AddMapster();
+    builder.Services.AddValidatorsFromAssemblyContaining<TestRequest>();
+    builder.Services.AddFluentValidationAutoValidation();
+    builder.Services.AddControllers();
+    builder.Services.AddSwaggerGen();
+    builder.Services.AddHealthChecks().AddCheck<SampleHealthCheck>("Sample");
+
+    logger.Information("Services configured successfully");
+
+    var app = builder.Build();
+
+    logger.Information("Application built successfully, configuring pipeline...");
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        logger.Information("Swagger configured for development environment");
+    }
+
+    app.MapHealthChecks("/healthz");
+    app.UseHttpsRedirection();
+    app.UseAuthorization();
+    app.MapControllers();
+
+    logger.Information("Application pipeline configured successfully");
+    logger.Information("Starting application on URLs: {Urls}", string.Join(", ", builder.WebHost.GetSetting("urls")?.Split(';') ?? new[] { "Not specified" }));
+
+    app.Run();
 }
 catch (Exception ex)
 {
-    logger.Error(ex, " MessagePack configuration failed! {Error}", ex.Message);
-    throw; // Don't continue if MessagePack fails
+    logger.Fatal(ex, "Application failed to start: {ErrorMessage}", ex.Message);
+    throw;
 }
-
-// Add services to the container.
-builder.Services
-    .AddConfigurations(builder.Configuration)
-    .AddDataDependencies(builder.Configuration)
-    .AddBusinessDependencies();
-
-builder.Services.AddMapster();
-builder.Services.AddValidatorsFromAssemblyContaining<TestRequest>();
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
-builder.Services.AddHealthChecks().AddCheck<SampleHealthCheck>("Sample");
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+finally
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    logger.Information("Application stopped");
 }
-
-app.MapHealthChecks("/healthz");
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-
-app.Run();

@@ -8,7 +8,7 @@ This repository contains two main C# projects showcasing different aspects of mo
 A simple console-based chat application demonstrating Apache Kafka messaging capabilities.
 
 ### 2. MovieStoreB - Enterprise Movie Management System
-A comprehensive ASP.NET Core Web API showcasing clean architecture, caching strategies, external API integration, and distributed messaging.
+A comprehensive NET Core Web API showcasing clean architecture, caching strategies, external API integration, and distributed messaging.
 
 ---
 

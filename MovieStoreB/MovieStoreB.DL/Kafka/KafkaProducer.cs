@@ -1,4 +1,4 @@
-﻿using Confluent.Kafka;
+using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
 using MovieStoreB.Models.DTO;
 using MovieStoreB.Models.Serialization;
@@ -23,7 +23,7 @@ namespace MovieStoreB.DL.Kafka
             _config = new ProducerConfig()
             {
                 BootstrapServers = "localhost:9092"
-                // Keep it simple - remove properties that don't exist in your version
+                
             };
 
             _producer = new ProducerBuilder<TKey, TData>(_config)

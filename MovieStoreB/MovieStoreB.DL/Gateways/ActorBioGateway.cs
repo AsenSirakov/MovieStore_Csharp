@@ -1,4 +1,4 @@
-﻿using MovieStoreB.DL.Interfaces;
+using MovieStoreB.DL.Interfaces;
 using MovieStoreB.Models.DTO;
 using MovieStoreB.Models.Responses;
 using RestSharp;
@@ -12,7 +12,7 @@ namespace MovieStoreB.DL.Gateways
 
         public ActorBioGateway()
         {
-            // Using JSONPlaceholder as external API (like your teacher's setup)
+            // Using JSONPlaceholder as external API 
             var options = new RestClientOptions("https://jsonplaceholder.typicode.com")
             {
                 ThrowOnAnyError = false, // Don't throw exceptions on HTTP errors

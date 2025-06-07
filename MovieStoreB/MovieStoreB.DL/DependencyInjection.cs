@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MovieStoreB.DL.Cache;
 using MovieStoreB.DL.Gateways;
@@ -16,11 +16,11 @@ namespace MovieStoreB.DL
             // Register HttpClient for RestSharp
             services.AddHttpClient();
 
-            // Your existing repository registrations
+            
             services.AddSingleton<IMovieRepository, MoviesRepository>();
             services.AddSingleton<IActorRepository, ActorMongoRepository>();
 
-            // Your existing in-memory cache services
+            
             services.AddSingleton<IInMemoryCacheService<Movie, string>, InMemoryCacheService<Movie, string>>();
             services.AddSingleton<IInMemoryCacheService<Actor, string>, InMemoryCacheService<Actor, string>>();
 
@@ -81,7 +81,7 @@ namespace MovieStoreB.DL
         }
     }
 
-    // Your existing configurations
+    
     public class MoviesCacheConfiguration : CacheConfiguration
     {
     }
